@@ -1,8 +1,8 @@
 const router = require("express").Router();
-
+const verify = require("../routes/verifyToken");
 const Listing = require("../models/Listing");
 // Add New Listings
-router.post("/", async (req, res) => {
+router.post("/", verify, async (req, res) => {
     // res.send('Add New Listings');
     const listing = new Listing({
         title: req.body.title,

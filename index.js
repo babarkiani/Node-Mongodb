@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-
+const cors = require("cors");
 const mongoose = require("mongoose");
 mongoDb = require('./database/mongodb');
 // connect to db
@@ -19,12 +19,15 @@ mongoose.connect(mongoDb.db_new, {
 // Import Routes
 const listingRoutes = require("./routes/listings");
 const userRoutes = require("./routes/user");
+const authRoutes = require("./routes/auth");
 
 // Middlewares
 app.use(express.json());
+app.use(cors());
 // Import route Middlewares
 app.use("/api/listings", listingRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/auth", authRoutes);
 
 app.listen(3000, () => {
     console.log('App listening on port 3000.');
